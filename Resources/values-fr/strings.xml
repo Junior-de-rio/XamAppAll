@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="app_name">Xam Tout en Un</string>
+  <string name="action_settings">Parametres</string>
+  <string name="getLocation">Recuperer votre position</string>
+  <string name="locationText">Votre position est:</string>
+  <string name="goToMap">Voir ma position sur la carte</string>
+  <string name="retrieveLoc"><b>Recuperation de vos coordonnées</b></string>
+  <string name="ready">Operation terminée</string>
+  <string name="todayLocations"><b>Où suis-je allé aujourd\'hui</b></string>
+  <string name="deleteBtnTxt"><b>Vider la table</b></string>
+  <string name="locationMsg"><b>Votre position actuelle</b></string>
+  <string name="successMsg">Operation reussi</string>
+  <string name="failedMsg">Operation échoué:\ncause inconnue</string>
+  <string name="featureNotSupported"><b>Exception de support de fonctionnalitée</b></string>
+  <string name="featureNotEnabled"><b>Exception de non activation de fonctionnalitée</b></string>
+  <string name="permissionException"><b>Exception de permission</b></string> 
+</resources>
