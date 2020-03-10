@@ -13,7 +13,7 @@ using MyXamarinApp.Classes;
 
 namespace MyXamarinApp
 {
-    [Activity(Label = "locationActivity")]
+    [Activity(Label = "@string/app_name",Theme = "@style/AppTheme")]
     public class locationActivity : Activity
     {
         Button deleteBtn, clickInfo, counDisplayertBtn;
