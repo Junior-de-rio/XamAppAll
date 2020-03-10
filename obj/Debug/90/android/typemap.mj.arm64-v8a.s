@@ -1,4 +1,4 @@
-	/* Data Hash: BA86F17C1EF790F8 */
+	/* Data Hash: E3AE73B32A0291D9 */
 	.arch	armv8-a
 	.file	"typemap.mj.inc"
 
@@ -11,7 +11,7 @@ mj_typemap_header:
 	/* version */
 	.word	1
 	/* entry-count */
-	.word	1148
+	.word	1151
 	/* entry-length */
 	.word	262
 	/* value-offset */
@@ -22,5 +22,5 @@ mj_typemap_header:
 	.type	mj_typemap, @object
 	.global	mj_typemap
 mj_typemap:
-	.size	mj_typemap, 300777
+	.size	mj_typemap, 301563
 	.include	"typemap.mj.inc"

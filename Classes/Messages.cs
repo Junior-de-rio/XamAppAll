@@ -1,8 +1,9 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
+
 
 namespace MyXamarinApp.Classes
 {
@@ -19,9 +20,8 @@ namespace MyXamarinApp.Classes
         {
             try
             {
-                
-                Toast.MakeText(mcontext, message, ToastLength.Short).Show();
-
+                var toast = Toast.MakeText(mcontext, message, ToastLength.Short);
+                toast.Show();
             }
 
             catch(Exception e)
@@ -31,16 +31,32 @@ namespace MyXamarinApp.Classes
            
         }
 
-        public static void DisplayAlert(string title = "Exception", string message = "")
+        public static void DisplayAlert(string title = "Exception", string message = "",ViewStates viewStates=ViewStates.Invisible)
         {
-            var alert = new AlertDialog.Builder(mcontext);
+            var inflater = LayoutInflater.From(mcontext);
+            var dialog = new AlertDialog.Builder(mcontext).Create();
+            var view = inflater.Inflate(Resource.Layout.AlertInterface,null);
 
-            alert.SetTitle(title);
+            var _title = view.FindViewById<TextView>(Resource.Id._alertTitle);
+            var _message = view.FindViewById<TextView>(Resource.Id._alertMessage);
+            var _okBtn = view.FindViewById<Button>(Resource.Id._okBtn);
+            var _cancleBtn = view.FindViewById<Button>(Resource.Id._cancelBtn);
 
-            alert.SetMessage(message);
+            _cancleBtn.Visibility = viewStates;
 
-            alert.Show();
-           
+            _okBtn.Click += delegate { dialog.Dismiss(); };
+
+            _cancleBtn.Click+= delegate { dialog.Dismiss(); };
+
+            _title.Text = title;
+            _message.Text = message;
+
+            dialog.SetView(view);
+
+            dialog.SetIcon(Resource.Drawable.warning_icon);
+
+            dialog.Show();
+ 
         }
 
         

@@ -7,6 +7,12 @@ using MyXamarinApp.Classes;
 using Android.Content;
 using Android;
 using Android.Support.V4.Content;
+using Android.Views;
+using AlertDialog = Android.App.AlertDialog;
+using Android.Util;
+using MyXamarinApp.Services;
+using MyXamarinApp.Classes.Repositories;
+
 //using Android.Content.Res;
 
 namespace MyXamarinApp
@@ -14,19 +20,26 @@ namespace MyXamarinApp
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        readonly string[] permissions = new string[]
-        {
-                    Manifest.Permission.AccessCoarseLocation,
-                    Manifest.Permission.AccessFineLocation 
-        };
+        
+        bool isConnected;
+        
+        LayoutInflater inflater;
+
+        AlertDialog dialog;
 
         XamEssentialFeatures xamEssF;
         accessData db;
         LinearLayout locationLayout, progessLayout;
-        TextView locationDisplayer;
-        Button btnGetLocation, mapLauncher, todayLocations;
+        TextView locationDisplayer, formatedTime;
+        Button btnGetLocation, mapLauncher, todayLocations,logIn, saveLocation;
+        EditText email, passeword, locationPersonalName;
         Messages messages;
+        Intent serviceToStart;
         Intent intent;
+        LocationServiceConnection locationServiceConnection;
+        MyTexts allText;
+
+        View auth;
         
         
         protected override void OnCreate(Bundle savedInstanceState)
@@ -41,9 +54,42 @@ namespace MyXamarinApp
 
             messages = new Messages(this);
 
+            inflater = LayoutInflater.From(this);
+           
+            auth = inflater.Inflate(Resource.Layout.Authentication, null);
+
+            logIn = auth.FindViewById<Button>(Resource.Id.logIn);
+
+            Messages.ToastMessage(message: $"{logIn.Text}");
+
+            allText = new MyTexts(this);
+
+            email = auth.FindViewById<EditText>(Resource.Id.email);
+
+            locationPersonalName = FindViewById<EditText>(Resource.Id.locationPersonalName);
+
+            passeword = auth.FindViewById<EditText>(Resource.Id.passeword);
+
+            dialog = new AlertDialog.Builder(this).Create();
+
+            dialog.SetView(auth);
+
             db = new accessData("location.db3",this);
+
+            locationPersonalName.TextChanged+= delegate
+            {
+                if (string.IsNullOrEmpty(locationPersonalName.Text)) { locationPersonalName.Background = GetDrawable(Resource.Drawable.EditTextBackground); }
+                else
+                {
+                    locationPersonalName.Background = GetDrawable(Resource.Drawable.TextEditing);
+                }
+                
+            };
+
             
             locationDisplayer = FindViewById<TextView>(Resource.Id.locationDisplayer);
+
+            formatedTime = FindViewById<TextView>(Resource.Id.formatedTime);
 
             btnGetLocation = FindViewById<Button>(Resource.Id.getLocation);
 
@@ -51,24 +97,36 @@ namespace MyXamarinApp
            
             mapLauncher = FindViewById<Button>(Resource.Id.mapLauncher);
 
+            saveLocation= FindViewById<Button>(Resource.Id.saveLocation);
+
             locationLayout = FindViewById<LinearLayout>(Resource.Id.locationLayout);
 
             progessLayout = FindViewById<LinearLayout>(Resource.Id.progessLayout);
 
-            if (ContextCompat.CheckSelfPermission(this,Manifest.Permission.AccessCoarseLocation) != 0 || ContextCompat.CheckSelfPermission(this,Manifest.Permission.AccessFineLocation) != 0)
+            Messages.ToastMessage($"{accessData.isConnected}");
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) != 0 || ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != 0)
             {
-                
+                    
                     RequestPermissions(new string[]{
                     Manifest.Permission.AccessCoarseLocation,
                     Manifest.Permission.AccessFineLocation}, 0);
             }
+
+            saveLocation.Click += (s, e) => 
+            {
+
+                LocationsRepository.UpdateTable(locationPersonalName.Text);
+
+             
+            };
+
             btnGetLocation.Click += (s, e) =>
             {
-               
-                XamEssentialFeatures.Activity = this;
+
                 btnGetLocation.Enabled = false;
                 xamEssF.GetLocation(locationDisplayer,locationLayout,progessLayout, btnGetLocation);
-                    
+                
             };
             
             mapLauncher.Click += delegate
@@ -78,10 +136,48 @@ namespace MyXamarinApp
             };
             todayLocations.Click += delegate
             {
-                intent = new Intent(this, typeof(locationActivity));
-
-                StartActivity(intent);
+                if (LocationsRepository.GetLastLocation() != null)
+                { 
+                    Messages.ToastMessage($"Last location id={LocationsRepository.GetLastLocation()._id}");
+                }
+                else
+                {
+                    Messages.ToastMessage("Not location in the location table");
+                } 
+ 
+                 intent = new Intent(this, typeof(locationActivity));
+                 
+                 StartActivity(intent);
+                 
             };
+
+            
+            passeword.TextChanged += delegate { passeword.Background = GetDrawable(Resource.Drawable.TextEditing); };
+            email.TextChanged += delegate { email.Background = GetDrawable(Resource.Drawable.TextEditing); };
+
+            logIn.Click += (s, e) => {
+
+                if (db.isLogedIn(email.Text, passeword.Text))
+                {
+                    
+                    dialog.Dismiss();
+                    Messages.ToastMessage("LogIn successfully");
+
+                }
+
+                else {
+
+                    email.Background= GetDrawable(Resource.Drawable.ErrorBackground);
+                    passeword.Background =GetDrawable(Resource.Drawable.ErrorBackground);
+                    Log.Info("info", "LogIn Error");
+                    Messages.ToastMessage("Email or passeword incorrect");
+                    };
+            
+            };
+
+            
+
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -90,21 +186,55 @@ namespace MyXamarinApp
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+            if (locationServiceConnection == null) locationServiceConnection = new LocationServiceConnection(this);
+           // BindToService();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            Messages.ToastMessage($"isConnected:{locationServiceConnection.isConnected}");
+            if (locationServiceConnection.isConnected) Messages.ToastMessage("Connected");
+
+            //else Messages.ToastMessage("Service not Connected");
+
+        }
+
         protected override void OnDestroy()
         {
 
             base.OnDestroy();
+            Messages.ToastMessage("Activity destroyed");
             xamEssF = null;
-            
-           
-               
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
+            
             base.OnSaveInstanceState(outState);
+
+            //outState.PutBoolean("isLogedIn", isLogedIn);   
         }
 
+        public void BindToService()
+        {
+            if (isConnected) Messages.ToastMessage("Already connected");
+            else
+            {
+                serviceToStart = new Intent(this, typeof(LocationService));
 
+                isConnected = BindService(serviceToStart, locationServiceConnection, Bind.AutoCreate);
+            }
+        }
+
+        public void UnBindToService()
+        {
+            UnbindService(locationServiceConnection);   
+        }
+     
     }
 }
