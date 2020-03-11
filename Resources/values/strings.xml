@@ -20,4 +20,5 @@
    <string name="ConnextionHeader">AUTHENTICATION</string>
    <string name="accuracy">Accuracy</string>
   <string name="locationName">Assiciate a name</string>
+  <string name="locationMode">Location Mode</string>
 </resources>

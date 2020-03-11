@@ -8,6 +8,7 @@ background;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
 Button;obj\Debug\90\res\layout\activity_main.xml
 Button;obj\Debug\90\res\layout\alertinterface.xml
 Button;obj\Debug\90\res\layout\authentication.xml
+Button;obj\Debug\90\res\layout\location_activity.xml
 Button;obj\Debug\90\res\layout\locationlayout.xml
 cache-path;E:\MyApps\Android\XamarinnApps\MyXamarinApp\MyXamarinApp\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 color;obj\Debug\90\res\values\colors.xml
@@ -16,17 +17,17 @@ corners;obj\Debug\90\res\drawable\customerborder.xml
 corners;obj\Debug\90\res\drawable\edittextbackground.xml
 corners;obj\Debug\90\res\drawable\errorbackground.xml
 corners;obj\Debug\90\res\drawable\textediting.xml
-EditText;obj\Debug\90\res\layout\activity_main.xml
 EditText;obj\Debug\90\res\layout\authentication.xml
+EditText;obj\Debug\90\res\layout\location_activity.xml
 external-cache-path;E:\MyApps\Android\XamarinnApps\MyXamarinApp\MyXamarinApp\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 external-path;E:\MyApps\Android\XamarinnApps\MyXamarinApp\MyXamarinApp\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
 foreground;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher.xml
 foreground;obj\Debug\90\res\mipmap-anydpi-v26\ic_launcher_round.xml
 ImageButton;obj\Debug\90\res\layout\locationlayout.xml
 item;obj\Debug\90\res\values\styles.xml
-LinearLayout;obj\Debug\90\res\layout\activity_main.xml
 LinearLayout;obj\Debug\90\res\layout\alertinterface.xml
 LinearLayout;obj\Debug\90\res\layout\authentication.xml
+LinearLayout;obj\Debug\90\res\layout\location_activity.xml
 LinearLayout;obj\Debug\90\res\layout\locationlayout.xml
 ListView;obj\Debug\90\res\layout\locationlayout.xml
 padding;obj\Debug\90\res\drawable\customerborder.xml
@@ -34,8 +35,9 @@ padding;obj\Debug\90\res\drawable\edittextbackground.xml
 padding;obj\Debug\90\res\drawable\errorbackground.xml
 padding;obj\Debug\90\res\drawable\textediting.xml
 paths;E:\MyApps\Android\XamarinnApps\MyXamarinApp\MyXamarinApp\obj\Debug\90\lp\40\jl\res\xml\xamarin_essentials_fileprovider_file_paths.xml
-ProgressBar;obj\Debug\90\res\layout\activity_main.xml
+ProgressBar;obj\Debug\90\res\layout\location_activity.xml
 RelativeLayout;obj\Debug\90\res\layout\activity_main.xml
+RelativeLayout;obj\Debug\90\res\layout\location_activity.xml
 RelativeLayout;obj\Debug\90\res\layout\locationlayout.xml
 resources;obj\Debug\90\res\values\colors.xml
 resources;obj\Debug\90\res\values\ic_launcher_background.xml
@@ -55,6 +57,6 @@ stroke;obj\Debug\90\res\drawable\edittextbackground.xml
 stroke;obj\Debug\90\res\drawable\errorbackground.xml
 stroke;obj\Debug\90\res\drawable\textediting.xml
 style;obj\Debug\90\res\values\styles.xml
-TextView;obj\Debug\90\res\layout\activity_main.xml
 TextView;obj\Debug\90\res\layout\alertinterface.xml
 TextView;obj\Debug\90\res\layout\authentication.xml
+TextView;obj\Debug\90\res\layout\location_activity.xml

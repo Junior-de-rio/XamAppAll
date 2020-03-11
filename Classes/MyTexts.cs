@@ -18,8 +18,8 @@ namespace MyXamarinApp.Classes
         public static string ready { get; set; }
         public static string successMsg { get; set; }
         public static string failedMsg { get; set; }
-       /* public static string ready { get; }
-        public static string ready { get; }
+        public static string accuracy { get; set; }
+        /*public static string ready { get; }
         public static string ready { get; }
         public static string ready { get; }
         public static string ready { get; }
@@ -30,6 +30,7 @@ namespace MyXamarinApp.Classes
             ready = context.Resources.GetText(Resource.String.ready);
             successMsg = context.Resources.GetText(Resource.String.successMsg);
             failedMsg = context.Resources.GetText(Resource.String.failedMsg);
+            accuracy= context.Resources.GetText(Resource.String.accuracy);
         }
     }
 }

@@ -4,6 +4,9 @@ using System;
 using System.IO;
 using System.Linq;
 using Xamarin.Essentials;
+using MyXamarinApp.Models;
+using System.Collections.Generic;
+
 namespace MyXamarinApp.Classes.Repositories
 {
     public class LocationsRepository
@@ -17,42 +20,41 @@ namespace MyXamarinApp.Classes.Repositories
             
             db = new Lazy<SQLiteConnection>(()=>new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "location.db3"))).Value;
             lasLocationId = 0;
+            db.CreateTable<Mlocation>();
             //db = new SQLiteConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "location.db3"));   
         }
 
          public static bool isTableExiste()
-        {
+         {
+            bool tableExiste = false;
             try
             {
-                if (db.TableMappings.Any(x => x.MappedType == typeof(location)))
+                
+                if (db.TableMappings.Any(x => x.MappedType == typeof(Mlocation)))
                 {
-                    return true;
+                    tableExiste = true;
                 }
-                else
-                {
-                    return false;
-                }
+                
             }
             catch(Exception ex)
             {
-                Messages.DisplayAlert(message: ex.Message);
-                return false;
+                Messages.DisplayAlert(message: $"isTableExiste:{ex.Message}");              
             }
-            
+            return tableExiste;
         }
-        public static void SaveLocation(location mlocation)
+        public static void SaveLocation(Mlocation mlocation)
         {
             try
             {
                if (!isTableExiste())
                 {
-                    db.CreateTable<location>();
+                    db.CreateTable<Mlocation>();
                 }
                if(mlocation!=null)
                 {
                     db.Insert(mlocation);
                     lasLocationId = mlocation._id;
-                    Messages.ToastMessage("Insert successfully");
+                    Messages.ToastMessage("Inserted successfully");
                 }
                 else { Messages.ToastMessage($"Something hapened: {mlocation} Not successfully add"); }
 
@@ -60,28 +62,28 @@ namespace MyXamarinApp.Classes.Repositories
             }
             catch (Exception ex)
             {
-                Messages.DisplayAlert(message: ex.Message);
+                Messages.DisplayAlert(message: $"isTableExiste:{ex.Message}");
             }
            
             
 
         }
 
-        public static location GetLastLocation()
+        public static Mlocation GetLastLocation()
         {
-            location lastLocation = null;
+            Mlocation lastLocation = null;
             try
             {
                 if (TableNotEmpty())
                 {
-                    var query = db.Query<location>("select * from location order by  _id desc limit 1");
+                    var query = db.Query<Mlocation>("select * from MLocations order by  _id desc limit 1");
                     lastLocation = query[0];
                 }
                 
             }
             catch(SQLiteException ex)
             {
-                Messages.DisplayAlert(message: ex.Message);
+                Messages.DisplayAlert(message: $"isTableExiste:{ex.Message}");
             }
 
             return lastLocation;
@@ -90,7 +92,7 @@ namespace MyXamarinApp.Classes.Repositories
 
         public static bool TableNotEmpty()
         {
-            if (isTableExiste() && (db.Table<location>().Count() != 0)) return true;
+            if (isTableExiste() && (db.Table<Mlocation>().Count() > 0)) return true;
             else return false;
         }
 
@@ -125,13 +127,13 @@ namespace MyXamarinApp.Classes.Repositories
 
         public static void UpdateTable(string locationPersonal="")
         {
-            location lastLoc;
+            Mlocation lastLoc;
             Location currLocation;
             try
             {
                 var time = DateTime.Now.ToLocalTime();
                 currLocation = XamEssentialFeatures.currentLocation;
-                var myLoc = new location() { address = XamEssentialFeatures.address, latitude = currLocation.Latitude, longitude = currLocation.Longitude, time = time, accuracy = (double)currLocation.Accuracy, personalName = locationPersonal };
+                var myLoc = new Mlocation() { address = XamEssentialFeatures.address, latitude = currLocation.Latitude, longitude = currLocation.Longitude, time = time, accuracy = (double)currLocation.Accuracy, personalName = locationPersonal };
                 lastLoc = GetLastLocation();
 
                 if (lastLoc!=null)
@@ -161,6 +163,52 @@ namespace MyXamarinApp.Classes.Repositories
                 Messages.DisplayAlert(message: ex.Message);
             }
    
+        }
+
+        public static List<string> DisplayTableContent()
+        {
+            var query = new List<Mlocation>();
+            List<string> list = new List<string>();
+
+            if (isTableExiste())
+            {
+                query = db.Table<Mlocation>().ToList();
+            }
+
+            foreach (var result in query)
+            {
+
+                list.Add($"{result}");
+
+            }
+
+            return list;
+        }
+
+        public static void DeleteContent()
+        {
+            try
+            {
+
+                var res = db.Table<Mlocation>();
+                if (res.Count() == 0) Messages.ToastMessage("Countenu deja supprimer");
+                else
+                {
+
+                    // db.Query(,"select max(_id) from location", null);
+                    db.DeleteAll<Mlocation>();
+
+                    if (db.Table<Mlocation>().Count() == 0) Messages.ToastMessage(MyTexts.successMsg);
+
+                    else Messages.ToastMessage(MyTexts.failedMsg);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Messages.DisplayAlert(message: e.Message);
+            }
+
         }
     }
 }

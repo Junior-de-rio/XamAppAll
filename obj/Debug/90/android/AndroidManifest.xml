@@ -22,6 +22,7 @@
         <action android:name="com.xamarin.LocationService" />
       </intent-filter>
     </service>
+    <activity android:label="@string/app_name" android:theme="@style/AppTheme" android:name="crc648f81470fb40717bc.LocationActivity" />
     <service android:name="crc64a98abb514ffad9f1.KeepAliveService" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Battery Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.BatteryBroadcastReceiver" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Energy Saver Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.EnergySaverBroadcastReceiver" />

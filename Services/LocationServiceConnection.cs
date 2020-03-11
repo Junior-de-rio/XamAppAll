@@ -17,13 +17,13 @@ namespace MyXamarinApp.Services
     {
         public LocationBinder locationBinder { get; private set; }
 
-        public MainActivity activity;
+        public Activity activity;
 
         public bool isConnected { get; private set; }
 
         string Tag = typeof(LocationServiceConnection).FullName;
 
-        public LocationServiceConnection(MainActivity mactivity)
+        public LocationServiceConnection(Activity mactivity)
         {
             activity = mactivity;
             isConnected = false;

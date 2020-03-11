@@ -25,11 +25,11 @@ public class LocationServiceConnection
 			mono.android.TypeManager.Activate ("MyXamarinApp.Services.LocationServiceConnection, MyXamarinApp", "", this, new java.lang.Object[] {  });
 	}
 
-	public LocationServiceConnection (crc643d9a72f6d41fffce.MainActivity p0)
+	public LocationServiceConnection (android.app.Activity p0)
 	{
 		super ();
 		if (getClass () == LocationServiceConnection.class)
-			mono.android.TypeManager.Activate ("MyXamarinApp.Services.LocationServiceConnection, MyXamarinApp", "MyXamarinApp.MainActivity, MyXamarinApp", this, new java.lang.Object[] { p0 });
+			mono.android.TypeManager.Activate ("MyXamarinApp.Services.LocationServiceConnection, MyXamarinApp", "Android.App.Activity, Mono.Android", this, new java.lang.Object[] { p0 });
 	}
 
 
