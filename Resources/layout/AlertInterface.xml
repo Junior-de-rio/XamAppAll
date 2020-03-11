@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/customerborder"
+    android:layout_margin="5dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/material_blue_grey_800"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/_alertTitle"
+        android:textFontWeight="700"
+        android:gravity="center"
+       />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        android:textFontWeight="700"
+        android:textColor="@color/material_blue_grey_800"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/_alertMessage"
+
+  />
+
+    <LinearLayout 
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:text="@android:string/cancel"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_blue_bright"
+        android:textFontWeight="700"
+        android:id="@+id/_cancelBtn"/>
+
+    <Button    
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="10dp"
+        android:text="@android:string/ok"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_blue_bright"
+        android:textFontWeight="700"
+        android:id="@+id/_okBtn"/>
+        
+    </LinearLayout>
+    
+
+</LinearLayout>

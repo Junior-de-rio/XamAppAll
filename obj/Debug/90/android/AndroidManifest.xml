@@ -10,13 +10,19 @@
   <uses-feature android:name="android.hardware.location.gps" android:required="false" />
   <uses-feature android:name="android.hardware.location.network" android:required="false" />
   <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/AppTheme" android:name="android.app.Application" android:debuggable="true">
-    <activity android:label="locationActivity" android:name="crc643d9a72f6d41fffce.locationActivity" />
+    <activity android:label="@string/app_name" android:theme="@style/AppTheme" android:name="crc643d9a72f6d41fffce.locationActivity" />
     <activity android:label="@string/app_name" android:theme="@style/AppTheme" android:name="crc643d9a72f6d41fffce.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <service android:exported="true" android:name="com.xamarin.LocationService">
+      <intent-filter>
+        <action android:name="com.xamarin.LocationService" />
+      </intent-filter>
+    </service>
+    <activity android:label="@string/app_name" android:theme="@style/AppTheme" android:name="crc648f81470fb40717bc.LocationActivity" />
     <service android:name="crc64a98abb514ffad9f1.KeepAliveService" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Battery Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.BatteryBroadcastReceiver" />
     <receiver android:enabled="true" android:exported="false" android:label="Essentials Energy Saver Broadcast Receiver" android:name="crc64a0e0a82d0db9a07d.EnergySaverBroadcastReceiver" />

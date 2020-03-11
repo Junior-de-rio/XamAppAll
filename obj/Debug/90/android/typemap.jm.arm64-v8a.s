@@ -1,4 +1,4 @@
-	/* Data Hash: 3E15337595C772EC */
+	/* Data Hash: C3328F15C16BF2A4 */
 	.arch	armv8-a
 	.file	"typemap.jm.inc"
 
@@ -11,7 +11,7 @@ jm_typemap_header:
 	/* version */
 	.word	1
 	/* entry-count */
-	.word	1035
+	.word	1039
 	/* entry-length */
 	.word	262
 	/* value-offset */
@@ -22,5 +22,5 @@ jm_typemap_header:
 	.type	jm_typemap, @object
 	.global	jm_typemap
 jm_typemap:
-	.size	jm_typemap, 271171
+	.size	jm_typemap, 272219
 	.include	"typemap.jm.inc"

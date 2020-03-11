@@ -9,11 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MyXamarinApp.Activities;
 using MyXamarinApp.Classes;
+using MyXamarinApp.Classes.Repositories;
 
 namespace MyXamarinApp
 {
-    [Activity(Label = "locationActivity")]
+    [Activity(Label = "@string/app_name",Theme = "@style/AppTheme")]
     public class locationActivity : Activity
     {
         Button deleteBtn, clickInfo, counDisplayertBtn;
@@ -22,7 +24,6 @@ namespace MyXamarinApp
         int counter;
         ListView listLocation;
         string msg;
-        accessData db;
         List<string> list;
         protected override void OnCreate(Bundle savedInstanceState)
         {   
@@ -40,9 +41,9 @@ namespace MyXamarinApp
 
             listLocation = FindViewById<ListView>(Resource.Id.listLocation);
 
-            db = new accessData("location.db3",this);
+           
             
-            listLocation.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1,  db.displayTableContent() );
+            listLocation.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, LocationsRepository.DisplayTableContent() );
 
             msg = Resources.GetText(Resource.String.clickInfo);
             if (savedInstanceState != null) { counter = savedInstanceState.GetInt("counter",0); }
@@ -54,7 +55,7 @@ namespace MyXamarinApp
             clickInfo = new Button(this);
             backBtn.Click += delegate
             {
-                Intent intent = new Intent(this,typeof(MainActivity));
+                Intent intent = new Intent(this,typeof(LocationActivity));
 
                 StartActivity(intent);
             };
@@ -67,12 +68,11 @@ namespace MyXamarinApp
 
             deleteBtn.Click += (s, e) =>
             {
-                accessData.deleteAll();
+                LocationsRepository.DeleteContent();
                 listLocation.Adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, Array.Empty<string>());
             };
-
+           
             
-            // Create your application here
         }
         protected override void OnSaveInstanceState(Bundle outState)
         {

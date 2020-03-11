@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/linLyt"
-    android:layout_margin="5dp">
+    android:layout_margin="3dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-    android:orientation="horizontal">
+        android:orientation="horizontal">
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="wrap_content"
@@ -29,6 +29,7 @@
 <Button
     android:layout_marginTop="10dp"
     android:textFontWeight="700"
+    android:visibility="gone"
     android:textStyle="italic"
     android:id="@+id/counDisplayertBtn"
     android:text="Click sur moi"
