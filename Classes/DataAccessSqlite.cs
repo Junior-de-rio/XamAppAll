@@ -86,27 +86,7 @@ namespace MyXamarinApp.Classes
             return logIn;
             
             
-        }
-
-      /*  public bool IsTableExiste()
-        {
-            bool exist= false;
-
-            try
-            {
-                var res = db.Table<location>();
-                if (res != null) exist= true;
-            }
-            catch(SQLiteException ex)
-            {
-                Messages.DisplayAlert("SQLiteException", ex.Message);
-            }
-            catch(Exception e)
-            {
-                Messages.DisplayAlert(message: e.Message);
-            }
-            return exist;
-        }*/
+        }     
 
     }
 

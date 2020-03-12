@@ -6,6 +6,9 @@ using MyXamarinApp.Classes;
 using Android.Content;
 using MyXamarinApp.Services;
 using MyXamarinApp.Activities;
+using Java.Lang;
+
+
 //using Android.Content.Res;
 
 namespace MyXamarinApp
@@ -48,6 +51,8 @@ namespace MyXamarinApp
 
                 StartActivity(intent);
             };
+
+            
 
         }
             
