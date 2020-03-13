@@ -14,7 +14,7 @@ namespace MyXamarinApp.Services
 {
     class LocationBinder:Binder
     {
-        protected LocationService locationService { get;private set; }
+        public LocationService locationService { get;private set; }
 
         public LocationBinder(LocationService mlocationService)
         {

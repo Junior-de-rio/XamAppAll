@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MyApps\\Android\\XamarinnApps\\MyXamarinApp\\MyXamarinApp\\MyXamarinApp.csproj": {}
+    "H:\\Dodji\\Applcations\\AndroidXamarin\\XamAppAll\\MyXamarinApp.csproj": {}
   },
   "projects": {
-    "E:\\MyApps\\Android\\XamarinnApps\\MyXamarinApp\\MyXamarinApp\\MyXamarinApp.csproj": {
+    "H:\\Dodji\\Applcations\\AndroidXamarin\\XamAppAll\\MyXamarinApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyApps\\Android\\XamarinnApps\\MyXamarinApp\\MyXamarinApp\\MyXamarinApp.csproj",
+        "projectUniqueName": "H:\\Dodji\\Applcations\\AndroidXamarin\\XamAppAll\\MyXamarinApp.csproj",
         "projectName": "MyXamarinApp",
-        "projectPath": "E:\\MyApps\\Android\\XamarinnApps\\MyXamarinApp\\MyXamarinApp\\MyXamarinApp.csproj",
-        "packagesPath": "C:\\Users\\Administrateur\\.nuget\\packages\\",
-        "outputPath": "E:\\MyApps\\Android\\XamarinnApps\\MyXamarinApp\\MyXamarinApp\\obj\\",
+        "projectPath": "H:\\Dodji\\Applcations\\AndroidXamarin\\XamAppAll\\MyXamarinApp.csproj",
+        "packagesPath": "C:\\Users\\omniyat_dev1\\.nuget\\packages\\",
+        "outputPath": "H:\\Dodji\\Applcations\\AndroidXamarin\\XamAppAll\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrateur\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\omniyat_dev1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -27,7 +27,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Administrateur\\AppData\\Local\\Esri\\NuGet": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

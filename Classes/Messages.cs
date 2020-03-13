@@ -10,7 +10,7 @@ namespace MyXamarinApp.Classes
     class Messages
     {
         public static Context mcontext { get; set; }
-
+         
         public Messages(Context context)
         {
             mcontext = context;
@@ -18,10 +18,17 @@ namespace MyXamarinApp.Classes
 
         public static void ToastMessage(string message)
         {
+            
             try
             {
+                Activity activity = new Activity();
                 var toast = Toast.MakeText(mcontext, message, ToastLength.Short);
-                toast.Show();
+                activity.RunOnUiThread(() =>
+                {
+                   
+                    toast.Show();
+                });
+               
             }
 
             catch(Exception e)
@@ -54,8 +61,12 @@ namespace MyXamarinApp.Classes
             dialog.SetView(view);
 
             dialog.SetIcon(Resource.Drawable.warning_icon);
-
-            dialog.Show();
+            Activity activity = new Activity();
+            activity.RunOnUiThread(() =>
+            {
+                dialog.Show();
+            });
+           
  
         }
 

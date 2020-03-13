@@ -109,11 +109,11 @@ namespace MyXamarinApp.Classes
 
         }
 
-        public static async Task<string> LocationToAddress(Location location)
+        public static async Task<string> LocationToAddressAsync(Location location)
         {
             address = string.Empty;
             try
-            {
+            {  
                 var placemarkers = await Geocoding.GetPlacemarksAsync(location).ConfigureAwait(true);
                 if (placemarkers != null) 
                 {

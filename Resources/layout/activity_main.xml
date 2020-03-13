@@ -5,10 +5,10 @@
     android:layout_height="match_parent"  
     android:layout_margin="5dp">
          <Button
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:text="@string/goToMap"
-            android:id="@+id/_mapLauncher"
+            android:text="Start location service"
+            android:id="@+id/serviceBinderBtn"
             android:layout_margin="5dp"
             android:background="@android:color/holo_blue_light"
             android:textColorHighlight="@android:color/white"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:text="@string/locationMode"
             android:id="@+id/mlocationMode"
-            android:layout_toRightOf="@+id/_mapLauncher"
+            android:layout_toRightOf="@+id/serviceBinderBtn"
             android:layout_margin="5dp"   
             android:background="@android:color/holo_blue_light"
             android:textColorHighlight="@android:color/white"

@@ -6,6 +6,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using MyXamarinApp.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MyXamarinApp.Classes.Repositories
 {
@@ -44,6 +45,7 @@ namespace MyXamarinApp.Classes.Repositories
         }
         public static void SaveLocation(Mlocation mlocation)
         {
+
             try
             {
                if (!isTableExiste())
@@ -125,44 +127,50 @@ namespace MyXamarinApp.Classes.Repositories
             }
 
 
-        public static void UpdateTable(string locationPersonal="")
+        public static async Task UpdateTable(string locationPersonal="",Android.Locations.Location mlocations=null)
         {
             Mlocation lastLoc;
-            Location currLocation;
+            Android.Locations.Location currLocation;
             try
             {
                 var time = DateTime.Now.ToLocalTime();
-                currLocation = XamEssentialFeatures.currentLocation;
+                
+                currLocation = mlocations;
+                Location location2 = new Location(currLocation.Latitude, currLocation.Longitude);
+                string address = await XamEssentialFeatures.LocationToAddressAsync(location2).ConfigureAwait(true);
                 var myLoc = new Mlocation() { address = XamEssentialFeatures.address, latitude = currLocation.Latitude, longitude = currLocation.Longitude, time = time, accuracy = (double)currLocation.Accuracy, personalName = locationPersonal };
                 lastLoc = GetLastLocation();
 
                 if (lastLoc!=null)
                 {
+                    SaveLocation(myLoc);
+                    /* Location location = new Location(lastLoc.latitude, lastLoc.longitude);
 
-                    Location location = new Location(lastLoc.latitude, lastLoc.longitude);
-                
-                    if (isDiff10(location, currLocation))
-                    {
+                     if (isDiff10(location, location2))
+                     {
 
-                        SaveLocation(myLoc);
-                    }
-                    else
-                    {
 
-                        Messages.ToastMessage("Not added:The last location is too near  the current location");
-                    }
+
+                     }
+                     else
+                     {
+
+                         Messages.ToastMessage("Not added:The last location is too near  the current location");
+
+                     }*/
                 }
                 else
                 {
                     myLoc._id = 1;
                     SaveLocation(myLoc);
                 }
+              
             }
             catch(Exception ex)
             {
                 Messages.DisplayAlert(message: ex.Message);
             }
-   
+            return;
         }
 
         public static List<string> DisplayTableContent()

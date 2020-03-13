@@ -120,7 +120,7 @@ namespace MyXamarinApp.Activities
             {
 
                 LocationsRepository.UpdateTable(locationPersonalName.Text);
-
+                
 
             };
 
@@ -191,7 +191,7 @@ namespace MyXamarinApp.Activities
             {
                 if (grantResults != null && grantResults.Length == 2)
                 {
-                    if (grantResults[0] != (int)Permission.Granted && grantResults[1] != (int)Permission.Granted)
+                    if (grantResults[0] != (int)Permission.Granted || grantResults[1] != (int)Permission.Granted)
                     {
                         btnGetLocation.Enabled = false;
                     }
@@ -207,18 +207,21 @@ namespace MyXamarinApp.Activities
         protected override void OnStart()
         {
             base.OnStart();
-            if (locationServiceConnection == null) locationServiceConnection = new LocationServiceConnection(this);
-            // BindToService();
+            if (locationServiceConnection == null)
+            {
+                locationServiceConnection = new LocationServiceConnection(this);
+                BindToService();
+            }
         }
 
         protected override void OnResume()
         {
             base.OnResume();
 
-            /* Messages.ToastMessage($"isConnected:{locationServiceConnection.isConnected}");
-             if (locationServiceConnection.isConnected) Messages.ToastMessage("Connected");
-             */
-            //else Messages.ToastMessage("Service not Connected");
+            Messages.ToastMessage($"isConnected:{locationServiceConnection.isConnected}");
+            if (locationServiceConnection.isConnected) Messages.ToastMessage("Connected");
+             
+            else Messages.ToastMessage("Service not Connected");
 
         }
 
@@ -243,6 +246,7 @@ namespace MyXamarinApp.Activities
             if (isConnected) Messages.ToastMessage("Already connected");
             else
             {
+                
                 serviceToStart = new Intent(this, typeof(LocationService));
 
                 isConnected = BindService(serviceToStart, locationServiceConnection, Bind.AutoCreate);
@@ -252,6 +256,11 @@ namespace MyXamarinApp.Activities
         public void UnBindToService()
         {
             UnbindService(locationServiceConnection);
+        }
+
+        public static void Toast(string msg)
+        {
+            
         }
 
     }
